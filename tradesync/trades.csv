@@ -1,5 +1,6 @@
-symbol,quantity,price
-AAPL,100,182.5
-GOOG,50,2730.4
-MSFT,200,310.1
-AAPL,150,181.2
+real_trade = fetch_real_trades("AAPL")
+# Insert into DB using your existing code:
+cur.execute("""
+    INSERT INTO trades (symbol, quantity, price)
+    VALUES (%s, %s, %s) RETURNING id;
+""", (real_trade['symbol'], real_trade['quantity'], real_trade['price']))
